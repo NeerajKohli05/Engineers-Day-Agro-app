@@ -1,0 +1,193 @@
+/* 🌱 Global Styles */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #fdfdf7; /* light natural background */
+  color: #1f2937;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 700;
+  color: #1b4332;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* 📊 Stats Panels */
+.stat-panel {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px 20px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.stat-panel:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+.stat-panel h2 {
+  font-size: 2rem;
+  color: #2d6a4f;
+}
+
+/* 🌤 Weather Panel */
+.weather-panel {
+  background: linear-gradient(135deg, #d8f3dc, #b7e4c7);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+.weather-panel h3 {
+  margin-bottom: 10px;
+  color: #1b4332;
+}
+
+/* 🔌 Device Panels */
+.device-panel {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+  min-height: 280px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.device-panel:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.15);
+}
+.device-panel h5 {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #064e3b;
+}
+
+/* 📘 Resource Panels */
+.resource-panel {
+  background: #f1fdf4;
+  border-radius: 20px;
+  padding: 40px;
+  height: 100%;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.resource-panel:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.15);
+}
+.resource-panel h4 {
+  margin-bottom: 15px;
+  color: #1b4332;
+}
+
+/* 🌿 Buttons */
+.btn-primary-custom {
+  background: #2d6a4f;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: #fff;
+  transition: background 0.3s ease;
+}
+.btn-primary-custom:hover {
+  background: #1b4332;
+}
+
+.btn-accent {
+  background: #52b788;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: #fff;
+  transition: background 0.3s ease;
+}
+.btn-accent:hover {
+  background: #40916c;
+}
+
+/* 🌍 Hero Section */
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 100px 20px;
+  border-radius: 0 0 30px 30px;
+}
+.hero h1 {
+  color: #fefae0;
+  font-size: 3rem;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.hero p {
+  color: #e9f5db;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* 📌 Footer */
+footer {
+  background: #1b4332;
+  color: #fdfdf7;
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 60px;
+}
+footer p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+footer a {
+  color: #95d5b2;
+  margin: 0 8px;
+  transition: color 0.3s ease;
+}
+footer a:hover {
+  color: #d9ed92;
+}
+
+.login-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Left image section with gradient blend */
+.left-section {
+  flex: 2;
+  background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.4),
+      rgb(255, 255, 255)
+    ),
+    url("https://t3.ftcdn.net/jpg/06/74/71/56/240_F_674715601_ng1B85QYOYwolmkuBB7rKPVCEEPVetWJ.jpg");
+  background-size: cover;
+  background-position: center;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+/* Right section */
+.right-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+
+/* Card */
+.login-card {
+  max-width: 400px;
+  width: 100%;
+  border-radius: 20px;
+  background: #fff;
+}
+

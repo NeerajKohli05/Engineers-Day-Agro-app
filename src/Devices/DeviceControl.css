@@ -1,0 +1,39 @@
+.device-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.device-card {
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.device-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.device-card.on {
+  background-color: #e6fffa; /* light green */
+}
+.device-card.off {
+  background-color: #fef2f2; /* light red */
+}
+
+.device-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.device-name {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.device-status {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
