@@ -1,0 +1,427 @@
+/* ===============================
+   GLOBAL STYLES
+================================= */
+.dashboard {
+  font-family: "Inter", sans-serif;
+  background: #f9fafb;
+  color: #333;
+  overflow-x: hidden;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #2d3436;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  color: #636e72;
+}
+
+/* ===============================
+   HERO
+================================= */
+.hero {
+  background-image: url('https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e346abc3-4a83-4615-ae7f-6e10ab61da40.png');
+  background-size: cover;
+  background-position: 100% 20%;
+  background-repeat: no-repeat;
+  color: #fff;
+  text-align: center;
+  min-height: 70vh;   /* 👈 makes hero tall (70% of screen) */
+  display: flex;      /* center content vertically */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px; /* smaller padding now */
+  border-radius: 0 0 30px 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+  position: relative;
+  z-index: 1;
+}
+
+
+
+ 
+
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.btn-cta {
+  border: none;
+  padding: 12px 22px;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.btn-cta:hover {
+  transform: translateY(-3px);
+  opacity: 0.9;
+}
+
+.btn-cta.light {
+  background: white;
+  color: #2c3e50;
+}
+
+.btn-cta.dark {
+  background: #2c3e50;
+  color: white;
+}
+
+.btn-cta.secondary {
+  background: #ff9800;
+  color: white;
+}
+
+/* ===============================
+   LIVE STATS
+================================= */
+.stats {
+  padding: 60px 20px;
+}
+
+.stats-grid {
+  margin-top: 30px;
+}
+
+.stat-card {
+  text-align: center;
+  border-radius: 20px;
+  padding: 25px;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #27ae60;
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: #636e72;
+  margin-top: 8px;
+}
+
+/* ===============================
+   CONTROLS
+================================= */
+.controls {
+  padding: 60px 20px;
+  background: #f0f9f4;
+}
+
+.controls-card {
+  padding: 25px;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+}
+
+.mode-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.mode-label {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.mode-pill {
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.mode-pill.manual {
+  background: #ffebee;
+  color: #e53935;
+}
+
+.mode-pill.auto {
+  background: #e8f5e9;
+  color: #27ae60;
+}
+
+.btn-mode {
+  margin-left: 8px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+}
+
+.btn-mode.manual {
+  background: #e53935;
+  color: white;
+}
+
+.btn-mode.auto {
+  background: #27ae60;
+  color: white;
+}
+
+.pump-grid {
+  margin-top: 30px;
+}
+
+.pump-card {
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  background: #fdfdfd;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.pump-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.pump-status.on {
+  color: #27ae60;
+  font-weight: 700;
+}
+
+.pump-status.off {
+  color: #e53935;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 24px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.3s;
+}
+
+.slider:before {
+  content: "";
+  height: 18px;
+  width: 18px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  left: 3px;
+  bottom: 3px;
+  transition: 0.3s;
+}
+
+.switch input:checked + .slider {
+  background-color: #27ae60;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+.switch.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ===============================
+   WEATHER
+================================= */
+.weather {
+  padding: 60px 20px;
+}
+
+.weather-card {
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #9eeb7458, #c0e5ac00);
+  color: #2c3e50;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.weather-temp {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.weather-desc {
+  font-size: 1.1rem;
+  margin-top: 6px;
+}
+
+.weather-note {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* ===============================
+   PRESETS
+================================= */
+.presets {
+  padding: 60px 20px;
+  background: #f0f4ff;
+}
+
+.presets-card {
+  padding: 25px;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.presets-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.preset-btn {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  background: #2e86de;
+  color: white;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.preset-btn:hover {
+  transform: translateY(-3px);
+  opacity: 0.9;
+}
+
+.preset-info {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 15px;
+  color: #636e72;
+}
+
+/* ===============================
+   KNOWLEDGE
+================================= */
+.knowledge {
+  padding: 60px 20px;
+}
+
+.knowledge-card {
+  border-radius: 18px;
+  padding: 20px;
+  text-align: center;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+  transition: transform 0.2s;
+}
+
+.knowledge-card:hover {
+  transform: translateY(-4px);
+}
+
+.knowledge-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2e86de;
+}
+
+.knowledge-desc {
+  color: #636e72;
+  font-size: 0.95rem;
+}
+
+/* ===============================
+   FARMING INFO
+================================= */
+.farming-grid {
+  display: flex;
+  justify-content: center;
+  align-items: stretch; /* makes cards equal height */
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.farming-card {
+  flex: 1 1 calc(33.333% - 20px); /* 3 in one row */
+  max-width: 350px;
+  border-radius: 20px;
+  overflow: hidden;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 60px; /* stack image + content */
+}
+
+.farming-card:hover {
+  transform: translateY(-6px);
+}
+
+.farming-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  flex-shrink: 0; /* keeps image fixed */
+}
+
+.farming-content {
+  flex: 1; /* content expands to fill space */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ===============================
+   FOOTER
+================================= */
+.footer {
+  background: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  border-radius: 20px 20px 0 0;
+}
