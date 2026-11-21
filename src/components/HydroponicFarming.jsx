@@ -1,182 +1,108 @@
-// src/components/HydroponicFarming.jsx
 import React from "react";
-import { Container, Row, Col, Card, Button, Table } from "react-bootstrap";
+import "./Hydroponic.css";
 
 export default function HydroponicFarming() {
   const systems = [
     {
       name: "NFT (Nutrient Film Technique)",
-      img: "https://newagriindia.com/wp-content/uploads/2024/11/The-Ultimate-Guide-to-Nutrient-Film-Technique-Hydroponics.png",
-      desc: "A thin film of nutrient-rich water flows over plant roots in channels.",
-      link: "https://hydroplanner.com/blog/hydroponic-nutrient-film-technique-nft"
+      tag: "Recirculating",
+      desc: "A continuous, shallow stream of nutrient solution flows over root tips inside sloping gullies. Ideal for fast-growing greens."
     },
     {
       name: "DWC (Deep Water Culture)",
-      img: "https://5.imimg.com/data5/SELLER/Default/2024/10/457435196/BG/QX/OK/67194700/deep-water-culture-hydroponics.jpg",
-      desc: "Plants float on nutrient water with roots submerged for constant feeding.",
-      link: "https://www.trees.com/gardening-and-landscaping/deep-water-culture"
-    },
-    {
-      name: "Vertical Farming",
-      img: "https://images.squarespace-cdn.com/content/v1/63064607eb816a4d50027fd1/bd985f3a-432e-4830-896f-4412eb797256/lettuce+vines.jpg?format=2500w",
-      desc: "Maximize space with stacked layers of crops under controlled lighting.",
-      link: "https://www.edengreen.com/blog-collection/what-is-vertical-farming"
+      tag: "Submerged",
+      desc: "Plant roots hang directly suspended in an oxygenated, highly buffered nutrient reservoir. High stability and ease of operation."
     },
     {
       name: "Aeroponics",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPub8Xlne77YJs5eQalbgjR4vPFg4MiVnWig&s",
-      desc: "Roots are suspended in air and misted with nutrient solutions.",
-      link: "https://www.lettusgrow.com/aeroponic-technology"
+      tag: "Atomized Mist",
+      desc: "Roots are suspended in air and misted intermittently with fine nutrient droplets. Provides maximum root aeration and rapid growth."
+    },
+    {
+      name: "Vertical Farming",
+      tag: "Stacked Tier",
+      desc: "Multi-layer vertical towers maximize cultivation density per square meter under controlled artificial LED spectrums."
     }
   ];
 
+  const parameters = [
+    { name: "pH Level", target: "5.5 – 6.5", why: "Ensures optimal nutrient ionization and uptake" },
+    { name: "Electrical Conductivity (EC)", target: "1.2 – 2.4 mS/cm", why: "Measures dissolved fertilizer salt concentration" },
+    { name: "Water Temperature", target: "18 – 22 °C", why: "Maintains dissolved oxygen saturation; prevents Pythium root rot" },
+    { name: "Ambient Humidity", target: "55 – 65 %", why: "Balances transpiration rate and calcium absorption" },
+    { name: "Photoperiod", target: "14 – 16 hrs / day", why: "Drives vegetative photosynthetic accumulation" }
+  ];
+
   return (
-    <div>
-      {/* HERO SECTION */}
-      <section
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://risehydroponics.in/wp-content/uploads/2021/11/hydroponics-farm-india-1.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          padding: "80px 5%",
-          color: "#fff",
-          textAlign: "center",
-        }}
-      >
-        <h1>💧 Hydroponic Farming</h1>
-        <p>
-          Grow more food with less water. Learn hydroponic systems, key parameters,
-          and nutrient management for successful farming.
-        </p>
+    <div className="hydro-container">
+      {/* Page Header */}
+      <div className="page-header">
+        <div>
+          <h1 className="page-title">Hydroponics</h1>
+          <p className="page-subtitle">Soilless cultivation architectures and target parameter matrices</p>
+        </div>
+      </div>
+
+      {/* Systems Grid */}
+      <section>
+        <h3 className="section-title">Core Systems</h3>
+        <div className="systems-grid">
+          {systems.map((sys, idx) => (
+            <div key={idx} className="system-card">
+              <span className="system-tag">{sys.tag}</span>
+              <h4 className="system-name">{sys.name}</h4>
+              <p className="system-desc">{sys.desc}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
-      <Container fluid className="p-5">
-        {/* SYSTEM TYPES */}
-        <h2 className="mb-4 text-center">Popular Hydroponic Systems</h2>
-        <Row>
-          {systems.map((sys, i) => (
-            <Col md={3} sm={6} key={i} className="mb-4">
-              <a
-                href={sys.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                <Card className="h-100 shadow-sm hover-shadow">
-                  <Card.Img
-                    variant="top"
-                    src={sys.img}
-                    alt={sys.name}
-                    style={{ height: "180px", objectFit: "cover" }}
-                  />
-                  <Card.Body>
-                    <Card.Title>{sys.name}</Card.Title>
-                    <Card.Text>{sys.desc}</Card.Text>
-                  </Card.Body>
-                </Card>
-              </a>
-            </Col>
-          ))}
-        </Row>
-
-        {/* KEY PARAMETERS */}
-        <h2 className="mt-5 mb-3 text-center">🌱 Key Parameters to Monitor</h2>
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              <th>Parameter</th>
-              <th>Recommended Range</th>
-              <th>Why It Matters</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>pH</td>
-              <td>5.5 – 6.5</td>
-              <td>Affects nutrient absorption</td>
-            </tr>
-            <tr>
-              <td>EC (Nutrient Strength)</td>
-              <td>1.2 – 2.4 mS/cm</td>
-              <td>Shows fertilizer concentration</td>
-            </tr>
-            <tr>
-              <td>Water Temperature</td>
-              <td>18 – 24 °C</td>
-              <td>Prevents root stress</td>
-            </tr>
-            <tr>
-              <td>Air Humidity</td>
-              <td>50 – 70%</td>
-              <td>Controls plant transpiration</td>
-            </tr>
-            <tr>
-              <td>Light Duration</td>
-              <td>12 – 16 hrs/day</td>
-              <td>Ensures photosynthesis</td>
-            </tr>
-          </tbody>
-        </Table>
-
-        {/* NUTRIENT GUIDE */}
-        <h2 className="mt-5 mb-3 text-center">🥦 Essential Nutrient Guide</h2>
-        <Row>
-          <Col md={6} className="mb-3">
-            <Card className="p-3 h-100 shadow-sm">
-              <h5>Macronutrients (Major)</h5>
-              <ul>
-                <li>Nitrogen (N) – Leafy growth</li>
-                <li>Phosphorus (P) – Root & flower development</li>
-                <li>Potassium (K) – Strength & fruiting</li>
-              </ul>
-            </Card>
-          </Col>
-          <Col md={6} className="mb-3">
-            <Card className="p-3 h-100 shadow-sm">
-              <h5>Micronutrients (Trace)</h5>
-              <ul>
-                <li>Calcium (Ca) – Strong cell walls</li>
-                <li>Magnesium (Mg) – Key for photosynthesis</li>
-                <li>Iron (Fe), Zinc (Zn), Copper (Cu) – Enzyme activity</li>
-              </ul>
-            </Card>
-          </Col>
-        </Row>
-
-        {/* AUTOMATION & MONITORING */}
-        <h2 className="mt-5 mb-3 text-center">⚡ Automation & Monitoring</h2>
-        <Row>
-          <Col md={4} className="mb-3">
-            <Card className="p-3 h-100 shadow-sm text-center">
-              <h5>📊 Sensors</h5>
-              <p>Monitor pH, EC, temperature, and humidity live.</p>
-            </Card>
-          </Col>
-          <Col md={4} className="mb-3">
-            <Card className="p-3 h-100 shadow-sm text-center">
-              <h5>🤖 Automated Control</h5>
-              <p>Automate pumps, lights, and nutrient dosing.</p>
-            </Card>
-          </Col>
-          <Col md={4} className="mb-3">
-            <Card className="p-3 h-100 shadow-sm text-center">
-              <h5>📱 Dashboard</h5>
-              <p>Track data & manage remotely from your app.</p>
-            </Card>
-          </Col>
-        </Row>
-
-        {/* CALL TO ACTION */}
-        <div className="text-center mt-5">
-          <h3>🚀 Ready to Start Hydroponics?</h3>
-          <p>
-            Access crop presets, smart devices, and learning resources to grow
-            better, faster, and smarter.
-          </p>
-          <Button variant="success">Go to Dashboard</Button>
+      {/* Parameter Table */}
+      <section className="mt-4">
+        <h3 className="section-title">Target Operational Parameters</h3>
+        <div className="table-wrapper">
+          <table className="param-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Recommended Range</th>
+                <th>Agronomic Function</th>
+              </tr>
+            </thead>
+            <tbody>
+              {parameters.map((p, idx) => (
+                <tr key={idx}>
+                  <td className="param-name">{p.name}</td>
+                  <td className="param-target">{p.target}</td>
+                  <td className="param-why">{p.why}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      </Container>
+      </section>
+
+      {/* Nutrient Ratios */}
+      <section className="mt-4">
+        <h3 className="section-title">Nutrient Guidelines</h3>
+        <div className="nutrients-grid">
+          <div className="nutrient-card">
+            <h5 className="nutrient-heading">Macronutrients (Primary)</h5>
+            <ul className="nutrient-list">
+              <li><strong>Nitrogen (N):</strong> Vegetative tissue and chlorophyll synthesis.</li>
+              <li><strong>Phosphorus (P):</strong> Root elongation, ATP energy transfer, and bloom.</li>
+              <li><strong>Potassium (K):</strong> Stomatal regulation and osmotic pressure balance.</li>
+            </ul>
+          </div>
+          <div className="nutrient-card">
+            <h5 className="nutrient-heading">Secondary & Micronutrients</h5>
+            <ul className="nutrient-list">
+              <li><strong>Calcium (Ca) & Magnesium (Mg):</strong> Cell wall stability and chlorophyll core.</li>
+              <li><strong>Iron (Fe) & Zinc (Zn):</strong> Cheated enzymes preventing leaf interveinal chlorosis.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

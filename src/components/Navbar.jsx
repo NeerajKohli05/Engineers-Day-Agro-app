@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { auth } from "../firebase";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-function NavigationBar() {
+export default function NavigationBar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [user, setUser] = useState(null);
 
-  // Track Firebase auth state
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       setUser(currentUser);
@@ -19,78 +17,57 @@ function NavigationBar() {
   const handleLogout = async () => {
     try {
       await auth.signOut();
-      navigate("/"); // redirect to login page
+      navigate("/");
     } catch (err) {
-      console.error("Logout Error:", err);
+      console.error("Logout error:", err);
     }
   };
 
   return (
-    <Navbar expand="lg" className="navbar-custom mb-4">
-      <Container fluid className="container-custom">
+    <header className="minimal-nav">
+      <div className="nav-container">
         {/* Brand */}
-        <Navbar.Brand as={Link} to="/dashboard" className="fw-bold text-white">
-          🌱 Agro Dashboard
-        </Navbar.Brand>
+        <Link to="/dashboard" className="nav-brand">
+          <span className="brand-dot"></span>
+          <span>Agro</span>
+        </Link>
 
-        {/* Mobile toggle */}
-        <Navbar.Toggle aria-controls="basic-navbar-nav" className="bg-light" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          {/* Nav links */}
-          <Nav className="me-auto">
-            <Nav.Link
-              as={Link}
-              to="/dashboard"
-              className={location.pathname === "/dashboard" ? "active" : ""}
-            >
-              Dashboard
-            </Nav.Link>
+        {/* Clean Nav Links */}
+        <nav className="nav-links">
+          <Link
+            to="/dashboard"
+            className={`nav-link-item ${location.pathname === "/dashboard" ? "active" : ""}`}
+          >
+            Overview
+          </Link>
+          <Link
+            to="/irrigation"
+            className={`nav-link-item ${location.pathname === "/irrigation" ? "active" : ""}`}
+          >
+            Irrigation
+          </Link>
+          <Link
+            to="/hydroponic"
+            className={`nav-link-item ${location.pathname === "/hydroponic" ? "active" : ""}`}
+          >
+            Hydroponics
+          </Link>
+        </nav>
 
-            <Nav.Link
-              as={Link}
-              to="/hydroponic"
-              className={location.pathname === "/hydroponic" ? "active" : ""}
-            >
-              Hydroponic Farming
-            </Nav.Link>
+        {/* Status & Session */}
+        <div className="nav-right">
+          <div className="nav-status">
+            <span className="pulse-dot"></span>
+            <span>Live</span>
+          </div>
 
-            <Nav.Link
-              as={Link}
-              to="/crops"
-              className={location.pathname === "/crops" ? "active" : ""}
-            >
-              Crop Library
-            </Nav.Link>
-
-            <Nav.Link
-              as={Link}
-              to="/devices"
-              className={location.pathname === "/devices" ? "active" : ""}
-            >
-              Devices
-            </Nav.Link>
-          </Nav>
-
-          {/* Right Side Buttons */}
-          {user ? (
-            <Button
-              style={{ backgroundColor: "#2d6a4f", border: "none", color: "#fff" }}
-              onClick={handleLogout}
-            >
-              Logout
-            </Button>
-          ) : (
-            <Button
-              style={{ backgroundColor: "#52b788", border: "none", color: "#fff" }}
-              onClick={() => navigate("/")}
-            >
-              Login
-            </Button>
+          {user && (
+            <button className="btn-signout" onClick={handleLogout}>
+              Sign out
+            </button>
           )}
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+        </div>
+      </div>
+    </header>
   );
 }
-
-export default NavigationBar;

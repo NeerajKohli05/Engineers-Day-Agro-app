@@ -10,25 +10,19 @@ import { auth } from "./firebase";
 
 import LoginPage from "./pages/LoginPage";
 import Dashboard from "./components/Dashboard";
-
+import Irrigation from "./pages/Irrigation";
 import HydroponicFarming from "./components/HydroponicFarming";
-import Devices from "./Devices/Devices";
-import CropLibrary from "./components/CropLibrary";
-
-
 import NavigationBar from "./components/Navbar";
 
-// 🔹 Layout wrapper (Navbar + Footer)
+// Minimal Layout Wrapper with Dark Tree Green Header & Footer
 function Layout({ children }) {
   return (
-    <div>
+    <div className="app-layout">
       <NavigationBar />
-      {children}
-      <footer className="footer">
-        <p>
-          © 2025 Agro Dashboard | Built with 🌱 IoT + React |{" "}
-          <a href="#">About</a> | <a href="#">Contact</a>
-        </p>
+      <main className="app-content">{children}</main>
+      <footer className="minimal-footer">
+        <div>🌱 Agro • IoT Precision Irrigation Platform</div>
+        <div className="footer-tagline">Engineered with Sustainable Dual-Source Water Conservation</div>
       </footer>
     </div>
   );
@@ -36,7 +30,7 @@ function Layout({ children }) {
 
 function App() {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // 🔹 handle initial auth check
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
@@ -46,18 +40,27 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <div className="app-layout">
+        <div className="minimal-loading">
+          <span className="loading-dot"></span>
+          <span>Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <Router>
       <Routes>
-        {/* Public Route */}
+        {/* Public Login Route */}
         <Route
           path="/"
-          element={user ? <Navigate to="/dashboard" /> : <LoginPage />}
+          element={user ? <Navigate to="/dashboard" replace /> : <LoginPage />}
         />
 
-        {/* Protected Routes inside Layout */}
+        {/* Protected Page 1: Overview */}
         <Route
           path="/dashboard"
           element={
@@ -66,11 +69,29 @@ function App() {
                 <Dashboard />
               </Layout>
             ) : (
-              <Navigate to="/" />
+              <Navigate to="/" replace />
             )
           }
         />
-        
+
+        {/* Protected Page 2: Irrigation Control */}
+        <Route
+          path="/irrigation"
+          element={
+            user ? (
+              <Layout>
+                <Irrigation />
+              </Layout>
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
+        />
+
+        {/* Backward-compatible redirect for /devices */}
+        <Route path="/devices" element={<Navigate to="/irrigation" replace />} />
+
+        {/* Protected Page 3: Hydroponics */}
         <Route
           path="/hydroponic"
           element={
@@ -79,35 +100,13 @@ function App() {
                 <HydroponicFarming />
               </Layout>
             ) : (
-              <Navigate to="/" />
+              <Navigate to="/" replace />
             )
           }
         />
-        <Route
-          path="/devices"
-          element={
-            user ? (
-              <Layout>
-                <Devices />
-              </Layout>
-            ) : (
-              <Navigate to="/" />
-            )
-          }
-        />
-        <Route
-    path="/crops"
-    element={
-      user ? (
-        <Layout>
-          <CropLibrary />
-        </Layout>
-      ) : (
-        <Navigate to="/" />
-      )
-    }
-  />
 
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </Router>
   );

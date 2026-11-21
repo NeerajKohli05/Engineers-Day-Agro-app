@@ -1,193 +1,226 @@
-/* 🌱 Global Styles */
+/* ===================================================
+   NATURAL BOTANICAL PALETTE: 
+   DEEP TREE GREEN HEADER & FOOTER + WARM BEIGE CANVAS
+   Airy, Spacious, Minimalist Organic Design
+=================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Deep Tree Foliage & Forest Greens */
+  --tree-dark: #0f2b1d;           /* Deep evergreen tree canopy */
+  --tree-primary: #1b4d32;        /* Lush tree green */
+  --tree-accent: #2e734d;         /* Vibrant leaf green */
+  --tree-light: #4ade80;          /* Fresh sprout green */
+  --tree-sage: #a3c9b1;           /* Soft canopy sage */
+
+  /* Warm Linen & Beige Foundations */
+  --bg-page: #f7f4ee;             /* Warm natural linen beige */
+  --bg-surface: #ffffff;          /* Pure warm white for cards */
+  --bg-surface-elevated: #f0ebe1; /* Soft warm sand container */
+  --bg-subtle: #f2ede4;           /* Gentle cream */
+  
+  /* Borders */
+  --border-subtle: #e5ded3;       /* Warm sand divider */
+  --border-card: #dfd6c7;         /* Soft organic card border */
+  
+  /* Botanical Accents */
+  --forest-deep: #143523;         /* Deep tree charcoal */
+  --forest-primary: #1e5237;      /* Rich botanical green */
+  --forest-hover: #16402b;        /* Deep hover */
+  --sage-muted: #577060;          /* Soft dried sage */
+  --sage-subtle: #e8ede9;         /* Gentle matcha / sage wash */
+  --sage-border: #c4d4c8;         /* Sage border */
+  
+  /* Earthy Tones */
+  --earth-clay: #934c38;          /* Warm terracotta for dry alerts */
+  --earth-clay-bg: #faeee9;       /* Soft clay wash */
+  --earth-gold: #8d6b2c;          /* Harvest amber gold */
+  --earth-gold-bg: #f9f3e5;       /* Warm oat gold wash */
+  
+  /* Typography */
+  --text-primary: #172b1e;        /* Deep foliage dark text */
+  --text-secondary: #526657;      /* Organic muted slate-green */
+  --text-muted: #829687;          /* Soft sage gray */
+  
+  /* Shapes & Shadows */
+  --radius-card: 20px;
+  --radius-pill: 9999px;
+  --shadow-organic: 0 4px 16px rgba(35, 30, 20, 0.03), 0 1px 3px rgba(35, 30, 20, 0.02);
+  --shadow-elevated: 0 12px 32px rgba(35, 30, 20, 0.05), 0 2px 6px rgba(35, 30, 20, 0.02);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: "Poppins", sans-serif;
-  background-color: #fdfdf7; /* light natural background */
-  color: #1f2937;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
   margin: 0;
   padding: 0;
-  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5 {
-  font-weight: 700;
-  color: #1b4332;
-}
-
-a {
-  text-decoration: none;
-}
-
-/* 📊 Stats Panels */
-.stat-panel {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 30px 20px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.stat-panel:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-}
-.stat-panel h2 {
-  font-size: 2rem;
-  color: #2d6a4f;
-}
-
-/* 🌤 Weather Panel */
-.weather-panel {
-  background: linear-gradient(135deg, #d8f3dc, #b7e4c7);
-  border-radius: 20px;
-  padding: 40px;
-  text-align: center;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
-}
-.weather-panel h3 {
-  margin-bottom: 10px;
-  color: #1b4332;
-}
-
-/* 🔌 Device Panels */
-.device-panel {
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 20px;
-  min-height: 280px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+/* App Layout */
+.app-layout {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.device-panel:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.15);
-}
-.device-panel h5 {
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: #064e3b;
 }
 
-/* 📘 Resource Panels */
-.resource-panel {
-  background: #f1fdf4;
-  border-radius: 20px;
-  padding: 40px;
-  height: 100%;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.resource-panel:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.15);
-}
-.resource-panel h4 {
-  margin-bottom: 15px;
-  color: #1b4332;
-}
-
-/* 🌿 Buttons */
-.btn-primary-custom {
-  background: #2d6a4f;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  color: #fff;
-  transition: background 0.3s ease;
-}
-.btn-primary-custom:hover {
-  background: #1b4332;
-}
-
-.btn-accent {
-  background: #52b788;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  color: #fff;
-  transition: background 0.3s ease;
-}
-.btn-accent:hover {
-  background: #40916c;
-}
-
-/* 🌍 Hero Section */
-.hero {
-  position: relative;
-  text-align: center;
-  padding: 100px 20px;
-  border-radius: 0 0 30px 30px;
-}
-.hero h1 {
-  color: #fefae0;
-  font-size: 3rem;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-.hero p {
-  color: #e9f5db;
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
-
-/* 📌 Footer */
-footer {
-  background: #1b4332;
-  color: #fdfdf7;
-  text-align: center;
-  padding: 40px 20px;
-  margin-top: 60px;
-}
-footer p {
-  margin: 6px 0;
-  font-size: 0.95rem;
-}
-footer a {
-  color: #95d5b2;
-  margin: 0 8px;
-  transition: color 0.3s ease;
-}
-footer a:hover {
-  color: #d9ed92;
-}
-
-.login-container {
-  display: flex;
-  min-height: 100vh;
-  font-family: "Poppins", sans-serif;
-}
-
-/* Left image section with gradient blend */
-.left-section {
-  flex: 2;
-  background: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.4),
-      rgb(255, 255, 255)
-    ),
-    url("https://t3.ftcdn.net/jpg/06/74/71/56/240_F_674715601_ng1B85QYOYwolmkuBB7rKPVCEEPVetWJ.jpg");
-  background-size: cover;
-  background-position: center;
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
-}
-
-/* Right section */
-.right-section {
+.app-content {
   flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ffffff;
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
-}
-
-/* Card */
-.login-card {
-  max-width: 400px;
+  max-width: 1040px;
   width: 100%;
-  border-radius: 20px;
-  background: #fff;
+  margin: 0 auto;
+  padding: 56px 24px 120px; /* Generous breathing room */
 }
 
+/* ===================================================
+   DEEP TREE GREEN NAVBAR
+=================================================== */
+.minimal-nav {
+  background: var(--tree-dark);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 24px rgba(15, 43, 29, 0.3);
+}
+
+.nav-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #f7f4ec;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.brand-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--tree-light);
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.7);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-link-item {
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--tree-sage);
+  padding: 8px 20px;
+  border-radius: var(--radius-pill);
+  transition: all 0.2s ease;
+}
+
+.nav-link-item:hover {
+  color: #ffffff;
+}
+
+.nav-link-item.active {
+  color: #ffffff;
+  background: var(--tree-primary);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #86efac;
+  background: rgba(46, 115, 77, 0.35);
+  border: 1px solid rgba(134, 239, 172, 0.3);
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+  animation: pulse-botanical 1.8s infinite;
+}
+
+@keyframes pulse-botanical {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.7; }
+}
+
+.btn-signout {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #e2ede5;
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-signout:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+/* ===================================================
+   DEEP TREE GREEN FOOTER
+=================================================== */
+.minimal-footer {
+  background: var(--tree-dark);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 44px 0 36px;
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--tree-sage);
+  margin-top: auto;
+}
+
+.minimal-footer .footer-tagline {
+  font-size: 0.78rem;
+  color: rgba(163, 201, 177, 0.6);
+  margin-top: 6px;
+}

@@ -5,10 +5,9 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-// <-- We'll use this for styles
+import "./LoginPage.css";
 
-function LoginPage() {
+export default function LoginPage() {
   const navigate = useNavigate();
 
   const [isLogin, setIsLogin] = useState(true);
@@ -16,115 +15,235 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e?.preventDefault();
+    if (!email || !password) {
+      setError("Please enter both email and password.");
+      return;
+    }
     setError("");
+    setIsSubmitting(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/dashboard");
     } catch (err) {
-      setError(err.message);
+      setError(
+        err.code === "auth/invalid-credential" || err.code === "auth/user-not-found"
+          ? "Invalid email or password. Please check your credentials."
+          : err.message
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  const handleSignup = async () => {
-    setError("");
-    if (password !== confirmPassword) {
-      setError("Passwords do not match");
+  const handleSignup = async (e) => {
+    e?.preventDefault();
+    if (!email || !password) {
+      setError("Please complete all required fields.");
       return;
     }
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters.");
+      return;
+    }
+    setError("");
+    setIsSubmitting(true);
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       navigate("/dashboard");
     } catch (err) {
       setError(err.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
+  // Quick fill with verified operator credentials
+  const fillDemoAccount = () => {
+    setEmail("neerajkohli472@gmail.com");
+    setPassword("NeerajNeeraj");
+    setIsLogin(true);
+    setError("");
+  };
+
   return (
-    <div className="login-container">
-      {/* Left Section with Image + Gradient */}
-      <div className="left-section"></div>
+    <div className="auth-viewport">
+      {/* LEFT: Atmospheric Botanical Brand Panel */}
+      <div className="auth-brand-side">
+        <div className="brand-glow-circle"></div>
+        
+        <div className="brand-top-nav">
+          <div className="brand-logo">
+            <span className="brand-dot-leaf"></span>
+            <span className="brand-name-text">AgroFlow</span>
+          </div>
+          <span className="platform-release-pill">v2.5 Platform</span>
+        </div>
 
-      {/* Right Section with Card */}
-      <div className="right-section">
-        <div className="login-card shadow-lg p-4">
-          <h2 className="text-center mb-4 fw-bold text-success">
-            {isLogin ? "Welcome Back 🌱" : "Join Us 🌾"}
-          </h2>
+        <div className="brand-hero-content">
+          <span className="editorial-eyebrow">PRECISION AGRONOMY & IOT</span>
+          <h1 className="editorial-headline">
+            Sustainable irrigation,<br />
+            governed by soil science.
+          </h1>
+          <p className="editorial-subtext">
+            Connecting capacitive field sensors and dual-relay pumps to an intelligent cloud engine. 
+            Prioritizing rainwater reservoirs to protect groundwater reserves.
+          </p>
 
-          {/* Toggle Buttons */}
-          <div className="d-flex justify-content-center mb-4">
+          <div className="feature-proof-pills">
+            <div className="proof-pill">
+              <span className="proof-dot"></span>
+              <span>Sub-Second Telemetry</span>
+            </div>
+            <div className="proof-pill">
+              <span className="proof-dot"></span>
+              <span>Dual-Pump Routing</span>
+            </div>
+            <div className="proof-pill">
+              <span className="proof-dot"></span>
+              <span>Aquifer Protection</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="brand-footer-note">
+          <span>Engineered with ESP32, Firebase RTDB & React 19</span>
+        </div>
+      </div>
+
+      {/* RIGHT: Warm Linen Beige Form Panel */}
+      <div className="auth-form-side">
+        <div className="auth-form-card">
+          {/* Header */}
+          <div className="form-header-row">
+            <div>
+              <h2 className="form-main-title">{isLogin ? "Welcome back" : "Create operator account"}</h2>
+              <p className="form-sub-title">
+                {isLogin
+                  ? "Access your live farm telemetry and pump relays"
+                  : "Register as an authorized field operator"}
+              </p>
+            </div>
+          </div>
+
+          {/* Segmented Mode Switch */}
+          <div className="auth-segmented-switch">
             <button
-              className={`btn me-2 ${
-                isLogin ? "btn-success" : "btn-outline-success"
-              }`}
-              onClick={() => setIsLogin(true)}
+              type="button"
+              className={`segmented-tab ${isLogin ? "active" : ""}`}
+              onClick={() => { setIsLogin(true); setError(""); }}
             >
-              Login
+              Sign In
             </button>
             <button
-              className={`btn ${
-                !isLogin ? "btn-success" : "btn-outline-success"
-              }`}
-              onClick={() => setIsLogin(false)}
+              type="button"
+              className={`segmented-tab ${!isLogin ? "active" : ""}`}
+              onClick={() => { setIsLogin(false); setError(""); }}
             >
-              Signup
+              Register
             </button>
           </div>
 
-          {/* Form Inputs */}
-          <input
-            type="email"
-            className="form-control mb-3"
-            placeholder="📧 Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            className="form-control mb-3"
-            placeholder="🔑 Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {!isLogin && (
-            <input
-              type="password"
-              className="form-control mb-3"
-              placeholder="🔒 Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+          {/* Error Banner */}
+          {error && (
+            <div className="auth-alert-banner">
+              <span className="alert-bullet">!</span>
+              <span>{error}</span>
+            </div>
           )}
 
-          {/* Error Message */}
-          {error && <p className="text-danger">{error}</p>}
+          {/* Form */}
+          <form onSubmit={isLogin ? handleLogin : handleSignup} className="auth-form-elements">
+            <div className="input-field-group">
+              <label className="input-label" htmlFor="email-input">
+                Operator Email
+              </label>
+              <input
+                id="email-input"
+                type="email"
+                required
+                className="minimal-input"
+                placeholder="name@farm.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
 
-          {/* Submit Button */}
-          <button
-            className="btn btn-success w-100 fw-bold"
-            style={{ padding: "10px", fontSize: "16px", borderRadius: "10px" }}
-            onClick={isLogin ? handleLogin : handleSignup}
-          >
-            {isLogin ? "Login" : "Signup"}
-          </button>
+            <div className="input-field-group">
+              <label className="input-label" htmlFor="password-input">
+                Password
+              </label>
+              <input
+                id="password-input"
+                type="password"
+                required
+                className="minimal-input"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
 
-          {/* Toggle Form Link */}
-          <p className="mt-3 text-center">
-            {isLogin ? "Not a member? " : "Already have an account? "}
-            <span
-              className="text-success fw-bold"
-              style={{ cursor: "pointer" }}
-              onClick={() => setIsLogin(!isLogin)}
+            {!isLogin && (
+              <div className="input-field-group">
+                <label className="input-label" htmlFor="confirm-password-input">
+                  Confirm Password
+                </label>
+                <input
+                  id="confirm-password-input"
+                  type="password"
+                  required
+                  className="minimal-input"
+                  placeholder="••••••••"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="btn-submit-botanical"
             >
-              {isLogin ? "Signup now" : "Login"}
-            </span>
-          </p>
+              {isSubmitting ? (
+                <span className="btn-loading-flex">
+                  <span className="tiny-spinner"></span>
+                  <span>Authenticating...</span>
+                </span>
+              ) : isLogin ? (
+                "Sign In to Dashboard →"
+              ) : (
+                "Create Account →"
+              )}
+            </button>
+          </form>
+
+          {/* Quick Demo Credentials Assistant */}
+          <div className="demo-credentials-helper">
+            <span className="helper-label">Verified Demo Operator:</span>
+            <button
+              type="button"
+              className="btn-fill-demo"
+              onClick={fillDemoAccount}
+            >
+              Auto-fill credentials
+            </button>
+          </div>
+
+          <div className="auth-footer-caption">
+            <span>Protected by Firebase Authentication SSL/TLS</span>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-export default LoginPage;
